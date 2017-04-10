@@ -1,0 +1,174 @@
+@CHARSET "UTF-8";
+
+
+.show_mobile
+{
+    display:none;
+}
+
+
+header
+{
+    position: absolute;
+    width:100%;
+    z-index:900;
+    font-family: Arial, sans-serif;
+    z-index: 900;
+    height: 100px;
+    -moz-box-shadow: 0px 0px 8px #000; 
+    -webkit-box-shadow: 0px 0px 8px #000; 
+    box-shadow: 0px 0px 8px #000; 
+    background:#ffffff;
+}
+
+
+.rightpanel
+{
+    position: fixed;
+    height:100%;
+    width:300px;
+    margin-right: 0;
+    right:0;
+    -moz-box-shadow: 0px 0px 8px #000; 
+    -webkit-box-shadow: 0px 0px 8px #000; 
+    box-shadow: 0px 0px 20px #000; 
+    background:#ffffff;
+    z-index: 901;
+    padding:1em;
+    overflow-y: auto;
+}
+
+#leftpanel
+{
+    position: fixed;
+    height:100%;
+    width:220px;
+    margin-left: 0;
+    left:0;
+    -moz-box-shadow: 0px 0px 50px #000; 
+    -webkit-box-shadow: 0px 0px 50px #000; 
+    box-shadow: 0px 0px 20px #000; 
+    background:#ffffff;
+    z-index: 902; /*au dessus de l'icone menu qui est Ã  901*/
+    padding:1em;
+    border-left: 5px solid #51a56e;
+}
+
+
+.container-header
+{
+    float:left;
+    width:100%;
+}
+
+
+.container-header-menu
+{
+    background: #078cea;
+    opacity:1;
+}
+
+.container-header-menu:hover
+{
+    opacity:1;
+}
+
+#container-logo
+{
+    line-height:1em;
+}
+
+.container
+{
+    padding:1em 0 0 1em;
+    float:left;
+    width:100%;
+}
+
+
+#menu
+{
+    float:left;
+}
+
+
+
+
+.centralizer
+{
+    margin:0 auto;
+    width:1000px;
+}
+
+#logo
+{
+    float:left;
+
+    width:100%;
+}
+
+#container-main
+{
+    width:100%;
+    background: #fff;
+    float:left;
+
+}
+
+
+.main
+{
+    width:100%;
+    padding:0px 10px 0px 10px;
+    float:left;
+    color: #222222;
+    
+}
+
+.main-boxing
+{
+     padding:10px 10px 10px 10px;
+    float:left;
+    color: #222222;
+    margin-top: 50%;
+    background: #fff;
+    -moz-box-shadow: 0 1px 2px #d1d1d1;
+    -webkit-box-shadow: 0 1px 2px #d1d1d1;
+    box-shadow: 0 1px 2px #d1d1d1;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
+    border-radius: 10px;
+}
+
+
+#container-footer
+{
+    color: white;
+    float:left;
+    width:100%;
+
+}
+
+footer
+{
+    width:100%;
+    float:left;
+    background: #101a26;
+    margin-top:50px;
+}
+
+nav
+{
+    margin:10px;
+    float:left;
+}
+
+
+
+.container-header-menu.floatable {
+    position: fixed;
+    z-index:999;
+    top:0;
+    margin-top:0;
+}
+

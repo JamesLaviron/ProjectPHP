@@ -1,0 +1,302 @@
+@CHARSET "UTF-8";
+
+@media (max-width: 800px) {
+
+ /* passer tous les éléments de largeur fixe en largeur automatique */
+ body  {
+   width: auto !important;
+   margin: 0;
+   padding: 0;
+   font-size: 1.4em;
+ }
+
+ p
+ {
+     font-size:0.8em;
+ }
+ 
+ /* fixer une largeur maximale  de 100 % aux éléments potentiellement problématiques */
+ img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, video {
+   max-width: 100%;
+ }
+/* conserver le ratio des images et empêcher les débordements de boîtes dûs aux border ou padding */
+ img {
+   height: auto; width: auto;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+ }
+ 
+ #menu li p a
+ {
+     float: none !important;
+     display:inline;
+
+ }
+ 
+ 
+ #menu li p
+ {
+     padding:1em 0 1em 0;
+     margin-bottom:0;
+ }
+
+ 
+header
+{
+    margin-top:0;
+
+	width:100%;
+	height:auto;
+ 	z-index:950;
+
+}
+
+.img_float
+{
+	float:none;
+	margin:0;
+	width:auto;
+	text-align:center;
+	width:100%;
+	display:block;
+}
+
+
+
+#main-header
+{
+    display: none;
+}
+
+#logo
+{
+    width:100%;
+    text-align:center;
+    height:auto;
+    margin-top: 0 !important;
+}
+
+#logo img
+{
+    width:80%;
+}
+
+ /* gestion des mots longs */
+ textarea, table, td, th, code, pre, samp {
+   word-wrap: break-word; /* passage à la ligne forcé */
+   -webkit-hyphens: auto; /* césure propre */
+   -moz-hyphens: auto;
+   hyphens: auto;
+ }
+
+
+
+input, textarea,select
+{
+    background: #f8f8f8;
+    padding:10px;
+   -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border-color:#D4D3D5 #E9E8EA #EFEEEF #E9E8EA;
+    border-style:solid;
+    font-size:1em;
+} 
+
+ /* masquer les éléments superflus */
+ .hide_mobile {
+   display: none !important;
+ }
+ 
+
+
+table .label
+{
+    text-align:right;
+    width:50%;
+    vertical-align:middle;
+    font-size:0.8em;
+}
+
+
+ 
+.centering
+{
+	margin:0 auto;
+	width:auto;
+}
+	
+
+
+#show_menu_button
+{
+    display:block;
+    width:100%;
+    text-align:center;
+    font-size:1em;
+    margin-bottom:1em;
+    color:white;
+    float:left;
+   
+}
+
+#container-menu
+{
+    font-size:1em;
+}
+
+nav
+{
+    width:100%;
+    float:left;
+}
+
+#menu
+{
+    display:none;
+    margin:0px;
+    display:0px;  
+    width:100%;
+    float:left;
+}
+
+
+
+#menu li
+{
+
+    text-decoration:none;
+    margin-left:0;
+    font-weight:bold;
+    width:100%;
+    float:left;
+    font-size:0.8em;
+    text-align:center;
+    background:#fff;
+    border:1px solid #949494;
+    border-left:none;
+    border-right:none;
+  
+}
+
+#menu li > a
+{
+    padding: 1em 0 1em 0 !important;
+    margin-left:0 !important;
+    width:100%;
+    color:#000 !important;
+     -moz-text-shadow: none; 
+    -webkit-text-shadow: none;  
+    text-shadow: none;
+   
+}
+
+#menu li > a:hover
+{
+    color:#fff !important;
+}
+
+
+.elem_link_block{
+    float:left;
+    width:100%;
+    margin-left:0;
+}
+
+
+
+.margin_left_20
+{
+    margin-left: 0;
+}
+
+.w30{width:100% !important;}
+.w33{width:100% !important;}
+.w40{width:100% !important;}
+.w50{width:100% !important;}
+.w70 {width:100% !important;}
+.w14{width:100% !important}
+.w15 { width:100% !important;}
+.w25_m{width:25%}
+.w70_m{width:70%}
+.w100_m{width:100%}
+.mt05{margin-top:0}
+.ml20{margin-left:0px !important;}
+.tac_m h1,.tac_m p,.tac_m h2{text-align: center !important;}
+.mb0_m{margin-bottom:0;}
+.mb1_m{margin-bottom:1em;}
+.fs08_m{font-size:0.8em !important;}
+.fs06_m{font-size:0.6em !important;}
+.bgh_m{background:none !important;}
+.ml50{margin-left:0 !important}
+.ml5{margin-left:0 !important}
+.ml0_m{margin-left: 0 !important}
+.ml10p_m{margin-left: 10% !important}
+.cw{color:#fff}
+.tac_m{text-align:center}
+
+table .label
+{
+    width:30%;
+}
+
+nav
+{
+margin:0;
+}
+
+.breadcrumb
+{
+    font-size:0.6em;
+}
+
+.button
+{
+    width:95%;
+    float:left;
+    text-align:center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.button2
+{
+    width:94%;
+    float:left;
+    text-align:center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+
+.show_mobile
+{
+    display:block;
+}
+
+
+.square1, .square2
+{
+    width:95%;
+    font-size: 1.4em;
+}
+
+.square1 a, .square2 a
+{ 
+   text-align: center;
+   width:100%;
+}
+
+.customer
+{
+    width:50%;
+}
+
+#slideout
+{
+	font-size:0.6em;
+}
+
+}
+

@@ -1,0 +1,36 @@
+#Identification par mot de passe / Uniquement version en ligne !
+#lyr_001
+#AuthUserFile /home/gsntechnqd/www/_51735/isigone/dev/lyra_com/sprint1/.htpasswd
+#AuthGroupFile /dev/null
+#AuthName "Accès Restreint"
+#AuthType Basic
+#require valid-user
+
+Options +FollowSymlinks
+addDefaultCharset UTF-8 
+RewriteEngine on
+#Local
+RewriteBase /2017-lyracom/sprint1/
+#EN ligne
+#RewriteBase /dev/lyra_com/sprint1/
+
+
+Options -Indexes
+
+RewriteRule ^index.html$  index.php [L]
+RewriteRule ^acces-refuse.html$  pages/generic/right-wrong.php [L]
+RewriteRule ^emplacement/(.*)$  pages/emplacement/$1 [QSA,L]
+RewriteRule ^gateway/(.*)$  pages/gateway/$1 [QSA,L]
+RewriteRule ^sensor/(.*)$  pages/sensor/$1 [QSA,L]
+RewriteRule ^light/(.*)$  pages/light/$1 [QSA,L]
+RewriteRule ^zone/(.*)$  pages/zone/$1 [QSA,L]
+RewriteRule ^scenario/(.*)$  pages/scenario/$1 [QSA,L]
+RewriteRule ^price/(.*)$  pages/price/$1 [QSA,L]
+RewriteRule ^budget/(.*)$  pages/budget/$1 [QSA,L]
+RewriteRule ^lightsheet/(.*)$  pages/lightsheet/$1 [QSA,L]
+RewriteRule ^groupuser/(.*)$  pages/groupuser/$1 [QSA,L]
+RewriteRule ^rightgroup/(.*)$  pages/rightgroup/$1 [QSA,L]
+RewriteRule ^hello.html$  pages/user/signin.php [QSA,L]
+RewriteRule ^bye.html$  pages/user/logout.php [QSA,L]
+RewriteRule ^user/(.*)$  pages/user/$1 [QSA,L]
+RewriteRule ^404.html$  pages/static/error.php [L]
