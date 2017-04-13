@@ -1,126 +1,98 @@
-<?php @session_start(); ?><?php
-$NAV = "12";
-$RIGHT = "16";
-?>
+<?php @session_start(); ?><?php ?>
 <?php
 require_once("controller/init.php");
 ?>
 <?php require_once($resspath . "pages/generic/top.php"); ?>
+<script>
+    $(document).ready(function () {
+        $("#task-add-button").click(function () {
 
-<div class="fulldiv p1em h100">
+            $("#task-add").submit();
 
-
-    <?php
-    $objects = getObjects();
-
-    $statesCo = 0;
-    $statesNoCo = 0;
-    $statesError = 0;
-    foreach ($objects as $object) {
-
-
-        switch ($object->getNature()) {
-            case $objectNatureGateway: {
-                    $gateway = getGatewayByIdObject($object->getId());
-
-                    if ($gateway->getConnectionStatus() == 1) {
-                        $statesCo++;
-                    } else if ($gateway->getConnectionStatus() == 0) {
-                        $statesNoCo++;
-                    } else {
-                        $statesError++;
-                    }
-
-                    break;
-                }
-            case $objectNatureSensor : {
-                    $sensor = getSensorByIdObject($object->getId());
-                    ?>
-
-                    <?php
-                    break;
-                }
-            case $objectNatureLight : {
-                    $light = getLightByIdObject($object->getId());
-
-                    if ($light->getConnected() == 1) {
-                        $statesCo++;
-                    } else if ($light->getConnected() == 0) {
-                        $statesNoCo++;
-                    } else {
-                        $statesError++;
-                    }
-
-                    break;
-                }
-
-            default : {
-                    $nature_txt = $txt[$idLang]['nature0001'];
-                    break;
-                }
-        }
+        });
     }
-    ?>
-
-    <div class="chart_div" >
-        <div id="chart_div_title">Device status connectivité</div>
-        <canvas id="myData" width="600" height="400"></canvas> 
-    </div>
-</div>
-<script type="text/javascript">
-
-    Chart.defaults.global.animation.easing = 'easeOutBounce';//Animation
-    var pieData = {
-        labels: [
-            "Connecté",
-            "Non connecté",
-            "Introuvable"
-        ],
-        datasets: [
-            {
-                data: [<?php echo $statesCo ?>, <?php echo $statesNoCo ?>, <?php echo $statesError ?>],
-                backgroundColor: [
-                    "#82d25b",
-                    "#f6af5c",
-                    "#ef6d7d"
-                ],
-                hoverBackgroundColor: [
-                    "#00D600",
-                    "#F97C00",
-                    "#B20000"
-                ],
-                borderColor: [
-                    "#ffffff",
-                    "#ffffff",
-                    "#ffffff"],
-                borderWidth: [3, 3, 3],
-                hoverBorderWidth: [3, 3, 3],
-                hoverBorderColor: [
-                    "#00D600",
-                    "#F97C00",
-                    "#B20000"]
-            }]
-    };
-    var options = {
-        segmentShowStroke: true,
-        title: {
-            display: true,
-            text: "Statut des devices",
-            fontSize: 15
-        }
-    };
-
-    var ctx = document.getElementById("myData").getContext("2d");
-
-    var myPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: pieData,
-        options: options
-    });
-
-
+    );
 
 </script>
+<div id="container-main">
+    <div class="centralizer">
+        <div class="main breadcrumb mtheader">
+        </div>
+    </div>
+</div>
+<div id="container-main">
+    <div class="centralizer">
+        <div class="main">
+            <h1> <?php echo $txt[$idLang]['basic0001'] ?></h1>
+            <?php
+            $action = false;
+
+            $errors = array();
 
 
+
+            if (isset($_POST['validate'])) {
+                $userId = sChamp($_POST['username']);
+                $projectId = sChamp($_POST['projectname']);
+                $date = sChamp($_POST['date']);
+                $hour = sChamp($_POST['hour']);
+                $minute = sChamp($_POST['minute']);
+                $childcategory = sChamp($_POST['childcategory']);
+
+                $description = 0;
+                if (isset($_POST['description']))
+                    $description = $_POST['description'];
+
+                $dateG = $date != null;
+
+                $time = $hour * 60 + $minute;
+                if ($date != null) {
+                    $date = str_replace('/', '-', $date);
+                    $date = date('Y-m-d', strtotime($date));
+                }
+
+                if ($dateG) {
+
+                    //Create new task
+                    $newTask = new Task();
+                    $newTask->add($userId, $projectId, $childcategory, $description, $date, $time);
+                } else {
+
+                    //Affichage messages erreurs (avant form)
+                    if (!$dateG) {
+                        $errors[] = $txt[$idLang]['error0001'];
+                    }
+
+
+                    echo "<p class='error'>";
+
+                    foreach ($errors as $error) {
+                        echo "- " . $error . "<br />";
+                    }
+
+                    echo "</p><br />";
+                }
+            }
+
+
+
+            if ($action) {
+                ?>
+                <p class='success'><?php echo $txt[$idLang]['user0004'] ?></p>
+
+                <?php
+                seRendreAenTemps($urltaskSee, $delayRedirect_inc);
+            } else {
+                require_once ($resspath . "pages/task/add-form.php");
+            }
+            ?>
+        </div>	
+    </div>
+</div>
+
+<div id="action_bottomright">
+    <a href="#" id="task-add-button" title="<?php echo $txt[$idLang]['basic0002'] ?>" ><img src="<?php echo $urlImg ?>ico-send-64.png" alt="+" /></a>
+    <a href="<?php echo $urlProjectModify ?>" title="<?php echo $txt[$idLang]['basic0008'] ?>" ><img src="<?php echo $urlImg ?>ico-edit-32.png" alt="+" /></a>
+</div>
+</div>
 <?php require_once($resspath . "pages/generic/bottom.php"); ?>
