@@ -22,10 +22,10 @@ function getTaskById($value) {
 function getTasksByIdUser($value) {
     global $connexion, $debug;
 
-    $object = array();
+    $objects = array();
     $value = sChamp($value);
 
-    $strQuery = "SELECT * FROM task WHERE idUser = '$value' ";
+    $strQuery = "SELECT * FROM task WHERE idUser = '$value' ORDER BY idProject DESC";
 
     if ($debug)
         echo $strQuery;
@@ -44,9 +44,87 @@ function getTasksByIdUser($value) {
     return $objects;
 }
 
+function getTasksByIdProject($value) {
+    global $connexion, $debug;
+
+    $objects = array();
+    $value = sChamp($value);
+
+    $strQuery = "SELECT * FROM task WHERE idProject = '$value' ORDER BY idUser DESC";
+
+    if ($debug)
+        echo $strQuery;
+    
+    $sth = $connexion->query($strQuery);
+
+    $sth->setFetchMode(PDO::FETCH_CLASS, 'Task');
+    
+    while ($obj = $sth->fetch()) {
+
+        $objects[] = $obj;
+    }
+    
+    $sth->closeCursor();
+    
+    return $objects;
+}
+
+function getTasks() {
+    global $connexion, $debug;
+
+    $object = array();
+
+    $strQuery = "SELECT * FROM task";
+
+    if ($debug)
+        echo $strQuery;
+    
+    $sth = $connexion->query($strQuery);
+
+    $sth->setFetchMode(PDO::FETCH_CLASS, 'Task');
+    
+    while ($obj = $sth->fetch()) {
+
+        $objects[] = $obj;
+    }
+    
+    $sth->closeCursor();
+    
+    return $objects;
+}
+
+function getTasksByIdUserAndIdProject($value1, $value2) {
+    global $connexion, $debug;
+
+    $objects = array();
+    $value1 = sChamp($value1);
+    $value2 = sChamp($value2);
+
+    $strQuery = "SELECT * FROM task WHERE idUser = '$value1' AND idProject = '$value2' ORDER BY date";
+
+    if ($debug)
+        echo $strQuery;
+    
+    $sth = $connexion->query($strQuery);
+
+    $sth->setFetchMode(PDO::FETCH_CLASS, 'Task');
+    
+    while ($obj = $sth->fetch()) {
+
+        $objects[] = $obj;
+    }
+    
+    $sth->closeCursor();
+    
+    return $objects;
+}
+
+
+
 function updateTask($o){
     global $connexion, $debug;
     
+    $id = $o->getId();
     $idUser = $o->getIdUser();
     $idProject = $o->getIdProject();
     $idCategory = $o->getIdCategory();
@@ -61,12 +139,13 @@ function updateTask($o){
         idCategory = '$idCategory',
         description = '$description',
         date = '$date',
-        time = '$time';
+        time = '$time'
 
 	WHERE id ='$id' ";
     
     if ($debug)
         echo $strQuery;
+        
     
     $sth = $connexion->prepare($strQuery);
 
@@ -91,4 +170,22 @@ function insertTask($o){
 
     return $connexion->lastInsertId();
     
+}
+
+function deleteTask($o){
+    
+    global $connexion, $debug;
+    
+    $id = $o->getId();
+    
+    $strQuery = "DELETE FROM task WHERE id = '$id'";
+
+    if ($debug)
+        echo $strQuery;
+
+    $sth = $connexion->prepare($strQuery);
+
+    $sth->execute();
+    
+    return true;
 }

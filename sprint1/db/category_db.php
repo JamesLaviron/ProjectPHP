@@ -25,7 +25,7 @@ function getPrimaryCategories() {
     $objects = array();
         
 
-    $strQuery = "SELECT * FROM category WHERE idParent = 0 ";
+    $strQuery = "SELECT * FROM category WHERE idParent = 0 ORDER BY name ASC";
     $sth = $connexion->prepare($strQuery);
 
     if ($debug)
@@ -51,7 +51,35 @@ function getChildCategories() {
     $objects = array();
 
 
-    $strQuery = "SELECT * FROM category WHERE idParent != 0 ";
+    $strQuery = "SELECT * FROM category WHERE idParent != 0 ORDER BY name ASC ";
+    $sth = $connexion->prepare($strQuery);
+
+    if ($debug)
+        echo $strQuery;
+    
+    $sth = $connexion->query($strQuery);
+
+    $sth->setFetchMode(PDO::FETCH_CLASS, 'Category');
+    
+    while ($obj = $sth->fetch()) {
+
+        $objects[] = $obj;
+    }
+    
+    $sth->closeCursor();
+    
+    return $objects;
+}
+
+function getChildCategoriesByIdParent($value) {
+    global $connexion, $debug;
+    
+    $value = sChamp($value);
+    
+    $objects = array();
+
+
+    $strQuery = "SELECT * FROM category WHERE idParent = '$value' ORDER BY name ASC";
     $sth = $connexion->prepare($strQuery);
 
     if ($debug)

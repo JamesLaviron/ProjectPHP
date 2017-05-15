@@ -10,6 +10,7 @@
         <link href="<?php echo $ressurl; ?>css/basic.css" type="text/css" rel="stylesheet" />
         <link href="<?php echo $ressurl; ?>css/elements.css" type="text/css" rel="stylesheet" />
         <link href="<?php echo $ressurl; ?>css/mobile.css" type="text/css" rel="stylesheet" />
+        <link href="<?php echo $ressurl; ?>css/tree.css" type="text/css" rel="stylesheet" />
 
 
         <meta name="viewport" content="width=device-width, initial-scale=1">    
@@ -21,13 +22,12 @@
         
         <script src="<?php echo $urlJs ?>jquery-3.1.1.min.js"></script>
 
-        <script src="<?php echo $urlPlug ?>qtip/jquery.qtip.min.js"></script>
-
         <link href="<?php echo $urlPlug; ?>qtip/jquery.qtip.min.css" type="text/css" rel="stylesheet" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="<?php echo $urlJs ?>datepicker-fr.js"></script>
+        <script src="<?php echo $urlJs ?>sorttable.js"></script>
 
 
 
@@ -61,5 +61,6 @@
     <body>        
         
         <div class="se-pre-con"></div>
+        <h1 style="vertical-align: top; margin-top: 30px" align="center"> <?php echo $txt[$idLang]['basic0001'] ?></h1>
         
        

@@ -13,23 +13,25 @@ require_once("controller/init.php");
     }
     );
 
+    $("#username").on('change', function (event) {
+        sortProjects();
+    });
+
 </script>
 <div id="container-main">
     <div class="centralizer">
         <div class="main breadcrumb mtheader">
+            <p><a href="<?php echo $urlDashboardSee ?>"><?php echo $txt[$idLang]['menu0005'] ?></a> - <a href="<?php echo $urlTaskAdd ?>"><b><?php echo $txt[$idLang]['menu0001'] ?></b></a> - <a href="<?php echo $urlTaskSee ?>"><?php echo $txt[$idLang]['menu0002'] ?></a> - <a href="<?php echo $urlProjectModify ?>"><?php echo $txt[$idLang]['menu0003'] ?></a> - <a href="<?php echo $urlTaskAnalyze ?>"><?php echo $txt[$idLang]['menu0004'] ?></a></p>
         </div>
     </div>
 </div>
 <div id="container-main">
     <div class="centralizer">
         <div class="main">
-            <h1> <?php echo $txt[$idLang]['basic0001'] ?></h1>
             <?php
             $action = false;
 
             $errors = array();
-
-
 
             if (isset($_POST['validate'])) {
                 $userId = sChamp($_POST['username']);
@@ -50,14 +52,11 @@ require_once("controller/init.php");
                     $date = str_replace('/', '-', $date);
                     $date = date('Y-m-d', strtotime($date));
                 }
-
                 if ($dateG) {
-
                     //Create new task
                     $newTask = new Task();
-                    $newTask->add($userId, $projectId, $childcategory, $description, $date, $time);
+                    $action = $newTask->add($userId, $projectId, $childcategory, $description, $date, $time);
                 } else {
-
                     //Affichage messages erreurs (avant form)
                     if (!$dateG) {
                         $errors[] = $txt[$idLang]['error0001'];
@@ -69,7 +68,6 @@ require_once("controller/init.php");
                     foreach ($errors as $error) {
                         echo "- " . $error . "<br />";
                     }
-
                     echo "</p><br />";
                 }
             }
@@ -78,11 +76,17 @@ require_once("controller/init.php");
 
             if ($action) {
                 ?>
-                <p class='success'><?php echo $txt[$idLang]['user0004'] ?></p>
-
+                <p class='success' id ="success"><?php echo $txt[$idLang]['task0015'] ?></p>
                 <?php
-                seRendreAenTemps($urltaskSee, $delayRedirect_inc);
+                require_once ($resspath . "pages/task/add-form.php");
             } else {
+//                if (!$dateG) {
+//                     ?>
+                     <script>
+                        $("label[for='date']").addClass("error-label");
+                    </script>
+                    //<?php
+//                    }
                 require_once ($resspath . "pages/task/add-form.php");
             }
             ?>

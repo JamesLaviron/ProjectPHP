@@ -292,7 +292,7 @@ table .label
 .mt0{margin-top:0 !important;}
 .mt1{margin-top: 1em}
 .mt05{margin-top: 0.5em}
-.mtheader{margin-top: 120px;}
+.mtheader{margin-top: 50px;}
 .pl20{padding-left:2em}
 .bgh{background: none !important;}
 .lh20{line-height:2em}
@@ -411,7 +411,7 @@ table .label
 	border-left: 0;
 }
 .table1 tr td {
-	padding:18px;
+	padding:5px;
 	border-top: 1px solid #ffffff;
 	border-bottom:1px solid #e0e0e0;
 	border-left: 1px solid #e0e0e0;
@@ -503,7 +503,6 @@ table .label
     -webkit-box-shadow: 0px 0px 8px #000; 
     box-shadow: 0px 0px 8px #000; 
     width:48%;
-    height:250px;
     margin:1%;
     float:left;
     
@@ -542,4 +541,41 @@ table .label
     -webkit-box-shadow: 0px 0px 8px #000; 
     box-shadow: 0px 0px 8px #000; 
     
+}
+
+.tableformat td:nth-child(n){
+    height: 100px;
+}
+
+.tableformat1 td:nth-child(n){
+    height: 50px;
+}
+#success {
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Firefox */
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Safari and Chrome */
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Opera */
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+@keyframes cssAnimation {
+    to {
+        border: 0px;
+        padding: 0;
+        width:0;
+        height:0;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        border: 0px;
+        padding: 0;
+        width:0;
+        height:0;
+        visibility:hidden;
+    }
 }

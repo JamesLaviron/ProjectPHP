@@ -43,7 +43,7 @@ function getUsers() {
 
     $objects = array();
     
-    $strQuery = "SELECT * FROM user";
+    $strQuery = "SELECT * FROM user ORDER BY name ASC";
     $sth = $connexion->prepare($strQuery);
 
     if ($debug)
