@@ -43,7 +43,7 @@ function getProjects() {
 
     $objects = array();
         
-    $strQuery = "SELECT * FROM project";
+    $strQuery = "SELECT * FROM project ORDER BY name ASC";
     $sth = $connexion->prepare($strQuery);
 
     if ($debug)
@@ -68,7 +68,7 @@ function getProjectsInProgress() {
 
     $objects = array();
 
-    $strQuery = "SELECT * FROM project WHERE status = 0 ";
+    $strQuery = "SELECT * FROM project WHERE status = 0 ORDER BY name ASC";
     $sth = $connexion->prepare($strQuery);
 
     if ($debug)
@@ -116,7 +116,7 @@ function updateProject($o){
 function insertProject($o){
     global $connexion, $debug;
     
-    $strQuery = "INSERT INTO project(id, name, status) VALUES ( '". $o->getId() ."','". $o->getName() ."','". $o->getStatus() ."')";
+    $strQuery = "INSERT INTO project( name, status) VALUES ('". $o->getName() ."','". $o->getStatus() ."')";
     
     if ($debug)
         echo $strQuery;

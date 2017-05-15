@@ -35,6 +35,13 @@ require_once($resspath . "pages/generic/top.php");
 //    $category = new Category();
 //    $category->add2($categorie->getNm_categorie(), 0, 0);
 //}
+$tasks = getTasks();
+foreach($tasks as $task){
+    if($task->getIdCategory() == 0){
+        $task->setIdCategory(37);
+        $task->update($task->getId(), $task->getIdUser(), $task->getIdProject(), $task->getIdCategory(), $task->getDescription(), $task->getDate(), $task->getTime());
+    }
+}
 ?>
 
 

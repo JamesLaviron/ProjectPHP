@@ -42,6 +42,10 @@ class Task{
         return $this->save();
     }
     
+    public function delete(){
+        deleteTask($this);
+    }
+    
     function save() {
 
         return updateTask($this);

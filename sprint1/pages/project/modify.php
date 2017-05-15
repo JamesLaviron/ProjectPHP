@@ -6,30 +6,36 @@ require_once("../../controller/init.php");
 <?php
 $projects = getProjects();
 ?>
-<script>    
-    
-    function editProject(){
-        var element = document.getElementById('project');   
+<script>
+
+    function editProject() {
+        var element = document.getElementById('project');
         var result = element.value;
-        window.location.href = "<?php echo $urlProjectUpdate ?>?id="+result;
+        window.location.href = "<?php echo $urlProjectUpdate ?>?id=" + result;
+    }
+
+    function deleteProject() {
+        var element = document.getElementById('project');
+        var result = element.value;
+        window.location.href = "<?php echo $urlProjectModify ?>?del=1&id=" + result;
+    }
+
+    function finalizeProject() {
+        var element = document.getElementById('project');
+        var result = element.value;
+        window.location.href = "<?php echo $urlProjectModify ?>?fn=1&id=" + result;
     }
     
-    function deleteProject(){
-        var element = document.getElementById('project');   
+    function addProject() {
+        var element = document.getElementById('name');
         var result = element.value;
-        window.location.href = "<?php echo $urlProjectModify ?>?del=1&id="+result;
-    }
-    
-    function finalizeProject(){
-        var element = document.getElementById('project');   
-        var result = element.value;
-        window.location.href = "<?php echo $urlProjectModify ?>?fn=1&id="+result;
+        window.location.href = "<?php echo $urlProjectModify ?>?add=1&name=" + result;
     }
 </script>
 <div id="container-main">
     <div class="centralizer">
         <div class="main breadcrumb mtheader">
-            <p><a href="<?php echo $urltaskSee ?>"><?php echo $txt[$idLang]['basic0001'] ?></a> > <?php echo $txt[$idLang]['basic0014']; ?></p>
+            <p><a href="<?php echo $urlDashboardSee ?>"><?php echo $txt[$idLang]['menu0005'] ?></a> - <a href="<?php echo $urlTaskAdd ?>"><?php echo $txt[$idLang]['menu0001'] ?></a> - <a href="<?php echo $urlTaskSee ?>"><?php echo $txt[$idLang]['menu0002'] ?></a> - <a href="<?php echo $urlProjectModify ?>"><b><?php echo $txt[$idLang]['menu0003'] ?></b></a> - <a href="<?php echo $urlTaskAnalyze ?>"><?php echo $txt[$idLang]['menu0004'] ?></a></p>
         </div>
     </div>
 </div>
@@ -40,7 +46,7 @@ $projects = getProjects();
             $action = false;
             $del = false;
             $errors = array();
-            
+
             //Management project finalize
             if (!empty($_GET['fn'])) {
                 if ($_GET['fn'] == 1) {
@@ -59,16 +65,31 @@ $projects = getProjects();
                     $action = deleteProject($projectSelected);
                 }
             }
-
+            
+            //Management project add
+            if (!empty($_GET['add']) && !empty($_GET['name'])) {
+                if ($_GET['add'] == 1) {
+                    $name = $_GET['name'];
+                    $newProject = new Project();
+                    $action = $newProject->add($name, 0);
+                }
+            }
+            
             if ($action && $del) {
                 ?>
                 <p class='success'><?php echo $txt[$idLang]['basic0019'] ?></p>
 
                 <?php
                 seRendreAenTemps($urlProjectModify, $delayRedirect_inc);
-            } elseif($action && !$del){
-                                ?>
+            } elseif ($action && !$del) {
+                ?>
                 <p class='success'><?php echo $txt[$idLang]['basic0020'] ?></p>
+
+                <?php
+                seRendreAenTemps($urlProjectModify, $delayRedirect_inc);
+            } elseif ($action && $add) {
+                ?>
+                <p class='success'><?php echo $txt[$idLang]['basic0023'] ?></p>
 
                 <?php
                 seRendreAenTemps($urlProjectModify, $delayRedirect_inc);
@@ -87,13 +108,13 @@ $projects = getProjects();
                                     if ($project->getStatus() == 0) {
                                         ?>
                                         <option value="<?php echo $project->getId(); ?>" <?php
-                                if (isset($_POST['validate']) && $_POST['project'] == $project) {
-                                    echo "selected='selected'";
-                                } else if (isset($_POST['validate'])) {
-                                    echo "value='" . $projectC . "'";
-                                }
+                                        if (isset($_POST['validate']) && $_POST['project'] == $project) {
+                                            echo "selected='selected'";
+                                        } else if (isset($_POST['validate'])) {
+                                            echo "value='" . $project . "'";
+                                        }
                                         ?>><?php echo $project->getName(); ?></option>
-                                            <?php
+                                                <?php
                                             }
                                         }
                                         ?>
@@ -104,6 +125,19 @@ $projects = getProjects();
                         <a href="#" onclick="editProject()" title="<?php echo $txt[$idLang]['basic0011'] ?>" ><img src="<?php echo $urlImg ?>ico-edit-32.png" alt="+" /></a>
                         <a href="#" onclick="deleteProject()" title="<?php echo $txt[$idLang]['basic0012'] ?>" ><img src="<?php echo $urlImg ?>ico-delete-32.png" alt="+" /></a>
                         <a href="#" onclick="finalizeProject()" title="<?php echo $txt[$idLang]['basic0013'] ?>" ><img src="<?php echo $urlImg ?>ico-install-32.png" alt="+" /></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for='name'><?php echo $txt[$idLang]['basic0021'] ?> <sup>:</sup></label><br />
+                        <span  class="field_comment"></span>
+                        <div class="field_container">
+                            <input type="text" name="name" id="name"/>
+                        </div>
+
+                    </td>
+                    <td>
+                        <a href="#" onclick="addProject()" title="<?php echo $txt[$idLang]['basic0022'] ?>" ><img src="<?php echo $urlImg ?>ico-add-32.png" alt="+" /></a>
                     </td>
                 </tr>
             </table>

@@ -4,7 +4,7 @@
 ob_start();
 date_default_timezone_set('Europe/Paris');
 header('Content-type: text/html; charset=utf-8');
-$debug = 1;
+$debug = 0;
 
 
 ini_set('display_errors',1);

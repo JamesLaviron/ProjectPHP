@@ -14,8 +14,7 @@ class Project{
     private $status;
 
     
-    public function add($id, $name, $status){
-        $this->id = $id;
+    public function add($name, $status){
         $this->name = $name;
         $this->status = $status;
         

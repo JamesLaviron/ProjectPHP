@@ -11,19 +11,23 @@ class User{
     
     private $id;
     private $name;
+    private $status;
 
     
-    public function add($id, $name){
+    public function add($id, $name, $status = '0'){
         $this->id = $id;
         $this->name = $name;
+        $this->status = $status;
+        
         alert("create user");
         return insertUser($this);
     }
     
-    public function update($id, $name) {
+    public function update($id, $name, $status = '0') {
         
         $this->id = $id;
         $this->name = $name;
+        $this->status = $status;
 
         return $this->save();
     }
@@ -49,5 +53,12 @@ class User{
         $this->name = $name;
     }
 
+    function getStatus() {
+        return $this->status;
+    }
+
+    function setStatus($status) {
+        $this->status = $status;
+    }
 
 }

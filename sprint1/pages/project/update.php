@@ -20,7 +20,7 @@ $project = getprojectById($id);
 <div id="container-main">
     <div class="centralizer">
         <div class="main breadcrumb mtheader">
-            <p><a href="<?php echo $urltaskSee ?>"><?php echo $txt[$idLang]['basic0001'] ?></a> > <a href="<?php echo $urlProjectModify ?>"><?php echo $txt[$idLang]['basic0014']; ?></a> > <?php echo getProjectById($id)->getName(); ?></p>
+            <p><a href="<?php echo $urlDashboardSee ?>"><?php echo $txt[$idLang]['menu0005'] ?></a> - <a href="<?php echo $urlTaskAdd ?>"><?php echo $txt[$idLang]['menu0001'] ?></a> - <a href="<?php echo $urlTaskSee ?>"><?php echo $txt[$idLang]['menu0002'] ?></a> - <a href="<?php echo $urlProjectModify ?>"><?php echo $txt[$idLang]['menu0003'] ?></a> > <?php echo $txt[$idLang]['basic0024'] . getProjectById($id)->getName(); ?></p>
         </div>
     </div>
 </div>
